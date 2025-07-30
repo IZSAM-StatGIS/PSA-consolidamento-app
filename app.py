@@ -17,8 +17,8 @@ st.header("🐗 Zonazione PSA – Gestione aggiornamento")
 # === DESCRIZIONE APPLICAZIONE ===
 st.markdown("""
 <p style='font-size: 16px;'>
-Questa applicazione automatizza il controllo di coerenza dei dati relativi alla zonazione PSA.
-Esegue una serie di operazioni per garantire la correttezza e l'allineamento dei dati spaziali e tabellari:
+Questa applicazione va utilizzata dopo aver effettuato le modifiche al layer della zonazione attraverso l'editor dedicato ed automatizza il controllo di coerenza dei dati.
+Operazioni eseguite:
 <ul>
 <li>Aggiornamento della data di riferimento</li>
 <li>Inserimento delle sigle provinciali mancanti</li>
@@ -68,7 +68,7 @@ if st.session_state.logged_in:
     with tab1:
         st.markdown("""
         <p style='font-size: 16px;'>
-        Questa sezione consente di avviare il flusso di aggiornamento della zonazione PSA.
+        Questa sezione consente di avviare il flusso di consolidamento dell'aggiornamento della zonazione PSA.
         </p>
         """, unsafe_allow_html=True)
     
