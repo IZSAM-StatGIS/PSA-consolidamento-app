@@ -48,7 +48,6 @@ with st.sidebar:
         login_button = st.form_submit_button("Accedi", use_container_width=True)
         logout_button = st.form_submit_button("Logout", use_container_width=True)
 
-        st.text("Solo gli utenti che fanno parte del gruppo per l'editing della zonazione possono lanciare le funzioni di questa applicazione")
 
         if login_button:
             try:
