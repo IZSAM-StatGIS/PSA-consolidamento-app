@@ -79,9 +79,9 @@ if st.session_state.logged_in:
             # === CARICAMENTO DATI ===
             with st.spinner("Caricamento contenuti..."):
                 gis = st.session_state.gis
-                item_zonazione = gis.content.get("96104aa14c7547abb3d316e032d3d9f9")
-                item_comuni = gis.content.get("70165e42908440d7a68b668421392665")
-                item_tabella_prov = gis.content.get("429475eea7bb4e3e96b6ad12dc65db7d")
+                item_zonazione = gis.content.get(st.secrets["ID_HFL_ZONAZIONE"])
+                item_comuni = gis.content.get(st.secrets["ID_HFL_COMUNI"])
+                item_tabella_prov = gis.content.get(st.secrets["ID_HFT_PROVINCE"])
             st.markdown('<span style="color:green">✔️ Contenuti caricati correttamente</span>', unsafe_allow_html=True)
 
 
@@ -194,7 +194,7 @@ if st.session_state.logged_in:
 
             if st.button("Avvia generazione"):
                 gis = st.session_state.gis
-                item_zonazione = gis.content.get("96104aa14c7547abb3d316e032d3d9f9")
+                item_zonazione = gis.content.get(st.secrets["ID_HFL_ZONAZIONE"])
                 sdf = item_zonazione.layers[0].query(
                     where="ZONA_RESTR IN ('I','II','III')",
                     out_fields="ZONA_RESTR, AREA_PSA, KMQ",
