@@ -88,7 +88,7 @@ if st.session_state.logged_in:
             # === AGGIORNAMENTO CAMPO DATA ===
             st.markdown("*📅 Aggiornamento campo DATA...*")
             today = datetime.now().strftime('%d-%m-%Y')
-            # item_zonazione.layers[0].calculate(where="1=1", calc_expression={"field": "DATA", "value": today})
+            item_zonazione.layers[0].calculate(where="1=1", calc_expression={"field": "DATA", "value": today})
             st.markdown(f'<span style="color:green">✔️ Data aggiornata a: {today}</span>', unsafe_allow_html=True)
 
             # === FIX SIGLA PROVINCIA ===
