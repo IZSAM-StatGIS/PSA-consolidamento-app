@@ -8,6 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
-.python-version
-pyproject.toml
-uv.lock
+# .python-version
+# pyproject.toml
+# uv.lock
