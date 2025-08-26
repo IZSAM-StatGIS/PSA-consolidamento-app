@@ -178,7 +178,7 @@ if st.session_state.logged_in:
 
             # === PULIZIA CAMPI NO_ADMIN ===
             st.markdown("*🛉 Pulizia campi zone NO_ADMIN...*")
-            for campo in ['PROVINCIA','COMUNE','ISTAT']:
+            for campo in ['PROVINCIA','COMUNE']: # Il campo ISTAT viene lasciato popolato per facilitare la gestione delle ZCEV
                 item_zonazione.layers[0].calculate(where="ORIGINE = 'NO_ADMIN'", calc_expression={"field": campo, "value": None})
             st.markdown('<span style="color:green">✔️ Pulizia completata</span>', unsafe_allow_html=True)
 
