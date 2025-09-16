@@ -130,7 +130,7 @@ if st.session_state.logged_in:
                 new_lim['ZONA_RESTR'] = 'LIM'
                 new_lim['AREA_PSA'] = None
                 new_lim['ORIGINE'] = 'ADMIN'
-                new_lim['DATA'] = today
+                new_lim['DATA'] = data_str
                 new_lim['KMQ'] = None
                 new_lim = new_lim.reindex(columns=['REGIONE', 'PROVINCIA', 'PROV', 'COMUNE', 'ISTAT', 'ZONA_RESTR','AREA_PSA', 'ORIGINE', 'DATA', 'KMQ', 'Shape__Area', 'Shape__Length','SHAPE'])
                 item_zonazione.layers[0].edit_features(adds=new_lim)
