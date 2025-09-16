@@ -72,8 +72,12 @@ if st.session_state.logged_in:
         Questa sezione consente di avviare il flusso di consolidamento dell'aggiornamento della zonazione PSA.
         </p>
         """, unsafe_allow_html=True)
-    
 
+        # === SELEZIONE DATA DI AGGIORNAMENTO ===
+        default_date = datetime.today()
+        data_scelta = st.date_input("📅 Seleziona la data da usare come riferimento (default: oggi)", value=default_date, format="DD-MM-YYYY")
+        data_str = data_scelta.strftime('%d-%m-%Y')
+    
         if st.button("Avvia il consolidamento"):
 
             # === CARICAMENTO DATI ===
@@ -84,12 +88,10 @@ if st.session_state.logged_in:
                 item_tabella_prov = gis.content.get(st.secrets["ID_HFT_PROVINCE"])
             st.markdown('<span style="color:green">✔️ Contenuti caricati correttamente</span>', unsafe_allow_html=True)
 
-
             # === AGGIORNAMENTO CAMPO DATA ===
-            st.markdown("*📅 Aggiornamento campo DATA...*")
-            today = datetime.now().strftime('%d-%m-%Y')
-            item_zonazione.layers[0].calculate(where="1=1", calc_expression={"field": "DATA", "value": today})
-            st.markdown(f'<span style="color:green">✔️ Data aggiornata a: {today}</span>', unsafe_allow_html=True)
+            st.markdown(f"*📅 Aggiornamento campo DATA al* `{data_str}`")
+            item_zonazione.layers[0].calculate(where="1=1", calc_expression={"field": "DATA", "value": data_str}) # Aggiorna attributo DATA nel layer
+            st.markdown(f'<span style="color:green">✔️ Data aggiornata a: {data_str}</span>', unsafe_allow_html=True)
 
             # === FIX SIGLA PROVINCIA ===
             st.markdown("*🧩 Verifica sigla provincia mancante...*")
