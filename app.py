@@ -22,10 +22,11 @@ Operazioni eseguite:
 <ul>
 <li>Aggiornamento della data di riferimento</li>
 <li>Inserimento delle sigle provinciali mancanti</li>
-<li>Identificazione e integrazione di nuove province</li>
+<li>Identificazione e integrazione di nuove Province</li>
 <li>Ricalcolo delle superfici in km²</li>
 <li>Assegnazione dell'area PSA sulla base dei raggruppamenti di regioni</li>
 <li>Pulizia dei campi amministrativi non rilevanti per le zone NO_ADMIN</li>
+<li>Allineamento tabella Province di riferimento</li>
 <li>Generazione di infografiche basate sui dati aggiornati</li>
 <li>Caricamento del regolamento UE aggiornato</li>
 </ul>
@@ -183,6 +184,25 @@ if st.session_state.logged_in:
             for campo in ['PROVINCIA','COMUNE']:
                 item_zonazione.layers[0].calculate(where="ORIGINE = 'NO_ADMIN'", calc_expression={"field": campo, "value": None})
             st.markdown('<span style="color:green">✔️ Pulizia completata</span>', unsafe_allow_html=True)
+
+            # === ALLINEAMENTO TABELLA PROVINCE ===
+            st.markdown("*🔄 Allineamento tabella province di riferimento...*")
+
+            # Ottiene l'elenco aggiornato delle province dalla zonazione
+            prov_zonazione = item_zonazione.layers[0].query(
+                where="1=1",
+                out_fields="REGIONE, PROV",
+                return_geometry=False,
+                return_distinct_values=True,
+                as_df=True
+            )[['REGIONE', 'PROV']].drop_duplicates().reset_index(drop=True)
+
+            # Elimina e reinserisce tutte le righe nella tabella
+            item_tabella_prov.tables[0].truncate()
+            item_tabella_prov.tables[0].edit_features(adds=prov_zonazione)
+
+            st.markdown(f"<span style='color:green'>✔️ Tabella province aggiornata: {len(prov_zonazione)} record inseriti</span>", unsafe_allow_html=True)
+
 
             # === CONCLUSIONE ===
             st.markdown('<h4 style="color:green">🎉 Tutto completato! Il layer della zonazione è stato aggiornato correttamente.</h4>', unsafe_allow_html=True)
