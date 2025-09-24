@@ -195,13 +195,14 @@ if st.session_state.logged_in:
                 return_geometry=False,
                 return_distinct_values=True,
                 as_df=True
-            )[['REGIONE', 'PROV']].drop_duplicates().reset_index(drop=True)
+            )
+            prov_pulite = prov_zonazione[['REGIONE', 'PROV']].drop_duplicates().reset_index(drop=True)
 
             # Elimina e reinserisce tutte le righe nella tabella
-            item_tabella_prov.tables[0].truncate()
-            item_tabella_prov.tables[0].edit_features(adds=prov_zonazione)
+            item_tabella_prov.tables[0].delete_features(where="1=1")
+            item_tabella_prov.tables[0].edit_features(adds=prov_pulite)
 
-            st.markdown(f"<span style='color:green'>✔️ Tabella province aggiornata: {len(prov_zonazione)} record inseriti</span>", unsafe_allow_html=True)
+            st.markdown(f"<span style='color:green'>✔️ Tabella province aggiornata: {len(prov_pulite)} record inseriti</span>", unsafe_allow_html=True)
 
 
             # === CONCLUSIONE ===
