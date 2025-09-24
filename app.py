@@ -186,7 +186,7 @@ if st.session_state.logged_in:
             st.markdown('<span style="color:green">✔️ Pulizia completata</span>', unsafe_allow_html=True)
 
             # === ALLINEAMENTO TABELLA PROVINCE ===
-            """
+            
             st.markdown("*🔄 Allineamento tabella province di riferimento...*")
 
             # Ottiene l'elenco aggiornato delle province dalla zonazione
@@ -204,7 +204,6 @@ if st.session_state.logged_in:
             item_tabella_prov.tables[0].edit_features(adds=prov_pulite)
 
             st.markdown(f"<span style='color:green'>✔️ Tabella province aggiornata: {len(prov_pulite)} record inseriti</span>", unsafe_allow_html=True)
-            """
 
             # === CONCLUSIONE ===
             st.markdown('<h4 style="color:green">🎉 Tutto completato! Il layer della zonazione è stato aggiornato correttamente.</h4>', unsafe_allow_html=True)
